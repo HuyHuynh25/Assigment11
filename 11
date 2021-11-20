@@ -1,0 +1,68 @@
+########################################################################
+ ##
+ ## CS 101 Lab
+ ## Program 11
+ ## Name: Huynh Gia Huy-Jim Huynh
+ ## Email: hghydv@umsystem.edu
+ ##
+ ## PROBLEM : Create write a program to create 
+ ## a clock class that can keeptrack of hours, minutes and seconds.   
+ ## ALGORITHM :
+ ##      Step 1:  Start
+ ##      Step 2:  Import time
+ ##      Step 3:  Define class Clock
+ ##      Step 4:  Define function __init__(self, hour=0, minute=0, second=0, type=0)
+ ##      Step 5:  Define function __str__(self)
+ ##      Step 6:  Define function tick(self)
+ ##      Step 7:  Make an if __name__ == "__main__"
+ ##      Step 10: Declare hours, minutes, seconds
+ ##      Step 11: Call class Clock
+ ##      Step 12: Make an while loop
+ ##      Step 13: End
+ ##ERROR HANDLING
+ ##      N/A
+ ##
+ ## OTHER COMMENTS:
+ ##      Any special comments
+ ##
+ ########################################################################
+import time
+class Clock:
+    def __init__(self, hour=0, minute=0, second=0, type=0):
+        self.hour = hour
+        self.minute = minute
+        self.second = second
+        self.type = type
+        self.meridian = ''
+    def __str__(self):
+        if self.type == 0:
+            return "{:02}:{:02}:{:02}{:<2}".format(self.hour, self.minute, self.second, self.meridian)
+        else:
+            if self.hour > 11:
+                self.meridian = ' pm'
+            else:
+                self.meridian = ' am'
+            return "{:02}:{:02}:{:02}{:<2}".format(self.hour, self.minute, self.second, self.meridian)
+    def tick(self):
+        self.second += 1
+        if self.second >= 60:
+            self.second = self.second - 60
+            self.minute += 1
+        elif self.minute >= 60:
+            self.minute = self.minute - 60
+            self.hour += 1
+        elif self.hour > 23:
+            self.hour = self.hour - 24
+if __name__ == "__main__":
+    hours = int(input('What is the current hour ==> '))
+    minutes = int(input('What is the current minute ==> '))
+    seconds = int(input('What is the current second ==> '))
+    clock = Clock(hours, minutes, seconds, 1)
+    while True:
+        print()
+        print(clock)
+        clock.tick()
+        time.sleep(1)
+
+
+
